@@ -1,5 +1,5 @@
 {% set name = "elyra-server" %}
-{% set version = "1.5.3" %}
+{% set version = "2.1.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/elyra-server-{{ version }}.tar.gz
-  sha256: 36dd386862252636bd1ff9af657fbb2c51d59a84c99332be9d749c64eed3410f
+  sha256: 3c982ff430073c061b67ba3ecdaa61767c485d5e0c6e821658c84679a4cf14ad
 
 build:
   number: 0
