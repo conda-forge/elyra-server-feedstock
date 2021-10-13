@@ -37,7 +37,7 @@ requirements:
     - jupyterlab >=3.0.17
     - jupyterlab-git ~=0.32
     - jupyterlab-lsp >=3.8.0
-    - kfp >=1.6.3<2.0,!=1.7.2
+    - kfp >=1.6.3,<2.0,!=1.7.2
     - kfp-tekton ~=0.8.1
     - minio >=5.0.7,<7.0.0
     - nbclient >=0.5.1
