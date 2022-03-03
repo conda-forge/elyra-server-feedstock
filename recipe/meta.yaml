@@ -1,5 +1,5 @@
 {% set name = "elyra-server" %}
-{% set version = "2.2.4" %}
+{% set version = "3.6.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/elyra-server-{{ version }}.tar.gz
-  sha256: 77cfc7e6ba7c67ad142a02440bce858d4ff0187cd5bf25090de978788a193721
+  sha256: acbc8daec62e9aaf2d818aa8c9ecbd0b0b2858f310dbc40409624dc9138cad94
 
 build:
   number: 0
@@ -16,45 +16,48 @@ build:
   entry_points:
     - elyra-metadata = elyra.metadata.metadata_app:MetadataApp.main
     - elyra-pipeline = elyra.cli.pipeline_app:pipeline
+    - jupyter-elyra = elyra.elyra_app:launch_instance
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python >=3.7
   run:
     - autopep8 >=1.5.0,<1.5.6
-    - black
-    - click
+    - black <=21.12b0
+    - click >=7.1.1,<8
     - colorama
     - entrypoints >=0.3
-    - jinja2 >=2.11,<3.0
+    - jinja2 >=2.11
     - jsonschema >=3.2.0
     - jupyter-resource-usage >=0.5.1
     - jupyter_client >=6.1.7
     - jupyter_core >=4.0,<5.0
-    - jupyter_server >=1.2.0
-    - jupyterlab >=3.0.0
-    - jupyterlab-git ==0.30.0
-    - jupyterlab-lsp >=3.0.0
-    - kfp ==1.3.0
-    - kfp-notebook >=0.22.0
-    - kfp-tekton ==0.6.0
-    - minio >=5.0.7,<7.0.0
+    - jupyter_server >=1.7.0
+    - jupyterlab >=3.0.17
+    - jupyterlab-git ~=0.32.0
+    - jupyterlab-lsp >=3.8.0
+    - jupyter-resource-usage >=0.5.1
+    - kfp >=1.7.0,<2.0,!=1.7.2
+    - kfp-tekton ~=1.0.1
+    - minio >=7.0.0,<8.0.0
     - nbclient >=0.5.1
-    - nbconvert >=5.6.1,<6.0
-    - nbdime >=3.0.0.b1
+    - nbconvert >=5.6.1
+    - nbdime ~=3.1
     - nbformat >=5.1.2
+    - networkx >=2.5.1
     - papermill >=2.1.3
     - pygithub
-    - python >=3.6
-    - python-language-server >=0.36.2
+    - python >=3.7
+    - python-lsp-server[all] >=1.1.0
     - pyyaml >=5.3.1,<6.0
-    - requests >=2.9.1,<3.0
+    - requests >=2.25.1,<3.0
     - rfc3986-validator >=0.1.1
     - tornado >=6.1.0
     - traitlets >=4.3.2
-    - urllib3 >=1.24.2
+    - urllib3 >=1.26.5
+    - watchdog >=2.1.3
     - websocket-client
     - yaspin
 
