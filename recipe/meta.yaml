@@ -29,7 +29,7 @@ requirements:
     - click >=7.1.1,<8
     - colorama
     - entrypoints >=0.3
-    - jinja2 >=2.11
+    - jinja2 >=2.11,<3.1
     - jsonschema >=3.2.0
     - jupyter-resource-usage >=0.5.1
     - jupyter_client >=6.1.7
