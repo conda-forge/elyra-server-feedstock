@@ -30,7 +30,7 @@ requirements:
     - colorama
     - entrypoints >=0.3
     - jinja2 >=2.11,<3.1
-    - jsonschema >=3.2.0.<4.0
+    - jsonschema >=3.2.0,<4.0
     - jupyter-resource-usage >=0.5.1
     - jupyter_client >=6.1.7
     - jupyter_core >=4.6
