@@ -21,6 +21,7 @@ build:
 
 requirements:
   host:
+    - jupyter-packaging
     - pip
     - python >=3.7
   run:
@@ -28,6 +29,7 @@ requirements:
     - black <=21.12b0
     - click >=8
     - colorama
+    - deprecation
     - entrypoints >=0.3
     - jinja2 >=2.11,<3.1
     - jsonschema >=3.2.0,<4.0
