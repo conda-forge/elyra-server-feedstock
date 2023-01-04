@@ -7,7 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/elyra-server-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
   sha256: 5f76992c52badc269752891d242d2d9ea975778bed72ab1899dba787f9e4dc78
 
 build:
