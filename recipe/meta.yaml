@@ -1,5 +1,5 @@
 {% set name = "elyra-server" %}
-{% set version = "3.13.0" %}
+{% set version = "3.14.1" %}
 
 
 package:
@@ -21,12 +21,12 @@ build:
 
 requirements:
   host:
-    - jupyter-packaging
+    - hatchling
     - pip
     - python >=3.7
   run:
     - autopep8 >=1.5.0
-    - black <=21.12b0
+    - black >=22.8.0
     - click >=8
     - colorama
     - deprecation
@@ -35,9 +35,10 @@ requirements:
     - jsonschema >=3.2.0,<4.0
     - jupyter-resource-usage >=0.5.1
     - jupyter_client >=6.1.7
-    - jupyter_core >=4.6.0
+    - jupyter_core >=4.11.2,<5
+    - jupyter_events <0.5.0
     - jupyter_server >=1.7.0
-    - jupyterlab >=3.4.0
+    - jupyterlab >=3.4.6,<4.0
     - jupyterlab-git ~=0.32.0
     - jupyterlab-lsp >=3.8.0
     - jupyter-resource-usage >=0.5.1
@@ -46,7 +47,7 @@ requirements:
     - MarkupSafe >=2.1
     - minio >=7.0.0
     - nbclient >=0.5.1
-    - nbconvert >=6.4.5
+    - nbconvert >=6.5.1
     - nbdime ~=3.1
     - nbformat >=5.1.2
     - networkx >=2.5.1
