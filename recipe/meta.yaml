@@ -16,15 +16,15 @@ build:
     - elyra-pipeline = elyra.cli.pipeline_app:pipeline
     - jupyter-elyra = elyra.elyra_app:launch_instance
   script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  number: 0
 
 requirements:
   host:
-    - python >=3.7
+    - python >=3.8
     - hatchling
     - pip
   run:
-    - python >=3.7
+    - python >=3.8
     - autopep8 >=1.5.0
     - black >=22.8.0
     - click >=8
@@ -34,8 +34,8 @@ requirements:
     - jinja2 >=3
     - jsonschema >=3.2.0
     - jupyter_client >=6.1.7
-    - jupyter_core >=4.11.0,<5 # remove <5 at 3.14.2
-    - jupyter_events <0.5.0 # change to >0.6.2 at 3.14.2
+    - jupyter_core >=4.11.0
+    - jupyter_events >=0.6.2
     - jupyter-packaging >=0.10
     - jupyter-resource-usage >=0.5.1
     - jupyter_server >=1.7.0
@@ -67,9 +67,6 @@ requirements:
 test:
   imports:
     - elyra_server
-# conda compatibility for jupyter_core and python 3.7 https://github.com/elyra-ai/elyra/issues/3069
-# Wait for pypi build >3.14.1 with https://github.com/elyra-ai/elyra/pull/3071
-# Wait for pypi build >3.14.1 with https://github.com/elyra-ai/elyra/pull/3076
   commands:
     - pip check
   requires:
