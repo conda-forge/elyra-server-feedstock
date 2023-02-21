@@ -1,13 +1,13 @@
 About elyra-server
 ==================
 
-Home: https://github.com/elyra-ai/elyra
+Home: https://pypi.org/project/elyra-server/
 
 Package license: Apache-2.0
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/elyra-server-feedstock/blob/main/LICENSE.txt)
 
-Summary: Elyra provides AI Centric extensions to JupyterLab
+Summary: The elyra-server package provides common core libraries and functions that are required by Elyra's individual extensions. Note: Installing this package alone will not enable the use of Elyra. Please install the 'elyra' package instead. e.g. pip install elyra[all]
 
 Current build status
 ====================
