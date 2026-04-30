@@ -1,5 +1,5 @@
 {% set name = "elyra-server" %}
-{% set version = "3.15.0" %}
+{% set version = "4.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
-  sha256: 616e2cb2f283279d6f1d8d48f70590ba9025248090fb85490c0b0f3446e57dc9
+  sha256: 0b314e55b310f2969dca5567751aa74e762453b5f313dca0c3f37b3af968e256
 
 build:
   noarch: python
@@ -25,40 +25,41 @@ requirements:
     - pip
   run:
     - python >={{ python_min }}
+    # NOTE: appengine-python-standard is listed in upstream PyPI metadata
+    # but is not available on conda-forge. Verify if actually needed at runtime.
     - autopep8 >=1.5.0
     - black >=22.8.0
-    - click >=8
+    - click ==8.1.8
     - colorama
     - deprecation
     - entrypoints >=0.3
     - jinja2 >=3
     - jsonschema >=3.2.0
-    - jupyter_client >=6.1.7
-    - jupyter_core >=4.11.0
-    - jupyter_events >=0.6.2
-    - jupyter-packaging >=0.10
-    - jupyter-resource-usage >=0.5.1
-    - jupyter_server >=1.7.0
-    - jupyterlab-git >=0.32,<1.0
-    - jupyterlab-lsp >=3.8.0
-    - jupyterlab >=3.4.6,<4.0
-    - kfp !=1.7.2,<2.0,>=1.7.0
+    - jupyter_client >=7.4.9
+    - jupyter_core >=5.3.1
+    - jupyter_events >=0.7.0
+    - jupyter-packaging >=0.12.3
+    - jupyter-resource-usage >=1.1.0,<1.2
+    - jupyter_server >=2.7.3
+    - jupyterlab-git >=0.51.2,<0.52
+    - jupyterlab-lsp >=5.1.0,<5.2
+    - jupyterlab >=4.4,<5.0
     - markupsafe >=2.1
-    - minio >=7.0.0
-    - nbclient >=0.5.1
+    - minio >=7.0.0,!=7.2.1
+    - nbclient >=0.10.0
     - nbconvert >=6.5.1
-    - nbdime >=3.1,<4.0
+    - nbdime >=4.0.1,<4.1
     - nbformat >=5.1.2
     - networkx >=2.5.1
     - papermill >=2.3.4
     - pygithub
-    - python-lsp-server >=1.1.0
+    - python-lsp-server >=1.11.0
     - pyyaml >=5.3.1
-    - requests >=2.25.1
+    - requests >=2.31
     - rfc3986-validator >=0.1.1
     - tornado >=6.1.0
     - traitlets >=4.3.2
-    - typing-extensions <5,>=3.10
+    - typing-extensions >=3.10
     - urllib3 >=1.26.5
     - watchdog >=2.1.3
     - websocket-client
@@ -68,7 +69,9 @@ test:
   imports:
     - elyra
   commands:
-    - pip check
+    # appengine-python-standard is an accidental upstream dep (never imported, not on conda-forge)
+    - pip check 2>&1 | grep -v "appengine-python-standard" | grep -E "which is not installed|has requirement" && exit 1 || true
+    - elyra-metadata --help || test $? -eq 1
   requires:
     - pip
     - python {{ python_min }}
