@@ -1,5 +1,5 @@
 {% set name = "elyra-server" %}
-{% set version = "4.0.0" %}
+{% set version = "4.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
-  sha256: 0b314e55b310f2969dca5567751aa74e762453b5f313dca0c3f37b3af968e256
+  sha256: d3f5c53637a57cd5b93ffdc6a6bf049b1200b17fc9ce3406d56fac804579f6eb
 
 build:
   noarch: python
@@ -16,7 +16,7 @@ build:
     - elyra-pipeline = elyra.cli.pipeline_app:pipeline
     - jupyter-elyra = elyra.elyra_app:launch_instance
   script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -25,10 +25,10 @@ requirements:
     - pip
   run:
     - python >={{ python_min }}
-    # NOTE: appengine-python-standard is listed in upstream PyPI metadata
-    # but is not available on conda-forge. Verify if actually needed at runtime.
+    # NOTE: jupyter-ai, jupyterlab-magic-wand, and kfp-kubernetes are listed
+    # in upstream PyPI metadata but are not available on conda-forge.
     - autopep8 >=1.5.0
-    - black >=22.8.0
+    - black >=26.1,<27
     - click ==8.1.8
     - colorama
     - deprecation
@@ -41,9 +41,11 @@ requirements:
     - jupyter-packaging >=0.12.3
     - jupyter-resource-usage >=1.1.0,<1.2
     - jupyter_server >=2.7.3
-    - jupyterlab-git >=0.51.2,<0.52
+    - jupyterlab-git >=0.52.0,<0.53
     - jupyterlab-lsp >=5.1.0,<5.2
     - jupyterlab >=4.4,<5.0
+    - kfp >=2.0.0
+    - kfp-kubernetes >=1.0.0
     - markupsafe >=2.1
     - minio >=7.0.0,!=7.2.1
     - nbclient >=0.10.0
@@ -60,7 +62,7 @@ requirements:
     - tornado >=6.1.0
     - traitlets >=4.3.2
     - typing-extensions >=3.10
-    - urllib3 >=1.26.5
+    - urllib3 >=2.5.0
     - watchdog >=2.1.3
     - websocket-client
     - yaspin
@@ -69,8 +71,8 @@ test:
   imports:
     - elyra
   commands:
-    # appengine-python-standard is an accidental upstream dep (never imported, not on conda-forge)
-    - pip check 2>&1 | grep -v "appengine-python-standard" | grep -E "which is not installed|has requirement" && exit 1 || true
+    # jupyter-ai and jupyterlab-magic-wand are not yet available on conda-forge
+    - pip check 2>&1 | grep -v "jupyter-ai" | grep -v "jupyterlab-magic-wand" | grep -E "which is not installed|has requirement" && exit 1 || true
     - elyra-metadata --help || test $? -eq 1
   requires:
     - pip
