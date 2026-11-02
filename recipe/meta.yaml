@@ -1,13 +1,13 @@
 {% set name = "elyra-server" %}
-{% set version = "4.1.1" %}
+{% set version = "4.2.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
-  sha256: 9c02434f5cb1644b5c18ec760f1dfdadfeb7e83496cb7bf730420883d8bf6869
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
+  sha256: 058e23dcb05beb33af64f6237a6e48259d82d2b6a71a98f0e3d13c5fa7f9f865
 
 build:
   noarch: python
