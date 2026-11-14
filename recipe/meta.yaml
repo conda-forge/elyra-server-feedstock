@@ -1,13 +1,13 @@
 {% set name = "elyra-server" %}
-{% set version = "4.1.1" %}
+{% set version = "4.2.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
-  sha256: 9c02434f5cb1644b5c18ec760f1dfdadfeb7e83496cb7bf730420883d8bf6869
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/elyra_server-{{ version }}.tar.gz
+  sha256: 058e23dcb05beb33af64f6237a6e48259d82d2b6a71a98f0e3d13c5fa7f9f865
 
 build:
   noarch: python
@@ -29,7 +29,7 @@ requirements:
     - python >={{ python_min }}
     - autopep8 >=1.5.0
     - black >=26.1,<27
-    - click ==8.1.8
+    - click >=8.2
     - colorama
     - deprecation
     - entrypoints >=0.3
@@ -40,11 +40,11 @@ requirements:
     - jupyter_core >=5.3.1
     - jupyter_events >=0.7.0
     - jupyter-packaging >=0.12.3
-    - jupyter-resource-usage >=1.1.0,<1.2
+    - jupyter-resource-usage >=1.3.0,<1.4
     - jupyter_server >=2.7.3
-    - jupyterlab-git >=0.52.0,<0.53
-    - jupyterlab-lsp >=5.1.0,<5.2
-    - jupyterlab >=4.4,<5.0
+    - jupyterlab-git >=0.55.0,<0.56
+    - jupyterlab-lsp >=5.3.0,<5.4
+    - jupyterlab >=4.6.0,<5
     - markupsafe >=2.1
     - minio >=7.0.0,!=7.2.1
     - nbclient >=0.10.0
