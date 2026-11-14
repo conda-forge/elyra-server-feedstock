@@ -24,9 +24,9 @@ requirements:
     - hatchling
     - pip
   run:
+    # Upstream also requires kfp, kfp-kubernetes and jupyterlab-magic-wand, but
+    # conda-forge cannot satisfy them yet, so they are left out (see test below).
     - python >={{ python_min }}
-    # NOTE: jupyter-ai, jupyterlab-magic-wand, and kfp-kubernetes are listed
-    # in upstream PyPI metadata but are not available on conda-forge.
     - autopep8 >=1.5.0
     - black >=26.1,<27
     - click ==8.1.8
@@ -35,6 +35,7 @@ requirements:
     - entrypoints >=0.3
     - jinja2 >=3
     - jsonschema >=3.2.0
+    - jupyter-ai >=2.0.0,<3.0.0
     - jupyter_client >=7.4.9
     - jupyter_core >=5.3.1
     - jupyter_events >=0.7.0
@@ -44,8 +45,6 @@ requirements:
     - jupyterlab-git >=0.52.0,<0.53
     - jupyterlab-lsp >=5.1.0,<5.2
     - jupyterlab >=4.4,<5.0
-    - kfp >=2.0.0
-    - kfp-kubernetes >=1.0.0
     - markupsafe >=2.1
     - minio >=7.0.0,!=7.2.1
     - nbclient >=0.10.0
@@ -71,8 +70,12 @@ test:
   imports:
     - elyra
   commands:
-    # jupyter-ai and jupyterlab-magic-wand are not yet available on conda-forge
-    - pip check 2>&1 | grep -v "jupyter-ai" | grep -v "jupyterlab-magic-wand" | grep -E "which is not installed|has requirement" && exit 1 || true
+    # pip check must pass except for upstream requirements that conda-forge
+    # cannot satisfy yet, which are therefore left out of run:
+    #   - jupyterlab-magic-wand, kfp-kubernetes: not packaged on conda-forge
+    #   - kfp: every conda-forge kfp 2.x pins urllib3 <2; elyra needs urllib3 >=2.5
+    #   - faiss-cpu (from jupyter-ai 2.x): conda-forge's faiss-cpu lacks PyPI metadata
+    - pip check 2>&1 | grep -vE "requires (jupyterlab-magic-wand|kfp|kfp-kubernetes|faiss-cpu), which is not installed" | grep -E "which is not installed|has requirement" && exit 1 || true
     - elyra-metadata --help || test $? -eq 1
   requires:
     - pip
